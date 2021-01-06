@@ -50,6 +50,7 @@ class Solution {
                     }
 
                     // define consumption here
+                    
 
                     // rest of routine can be skipped
                     continue;
@@ -58,10 +59,7 @@ class Solution {
                 // 'consume' characters from input until found terminating character (i.e. 'stop')
                 while(itr!=s.end())
                 {   
-                    if(*itr==stop) break; // let next sub-regex handle this otherwise                                
-
-                    // else if(*itr!='.'&&*itr!=p[idx]) break;
-                    // if(*itr=='.') std::cout<<"here!"<<std::endl; // dot '.' matches all characters
+                    if(*itr==stop) break;
                     if(p[idx]!='.'&&(p[idx]!=*itr)) break;
                     std::cout<<"consuming: "<<*itr<<std::endl;
                     std::advance(itr, 1);
