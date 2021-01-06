@@ -23,12 +23,16 @@ public:
         
         while(true)
         {
+            std::cout<<"idx is: "<<i<<std::endl;        
+            // if(i>=6) i--;
+            // if(i>=6) exit(1);
+
             // - negative index indicates all paths travelled
             if(i<0) break;
             
             // end reached if no writes left
             if(writes==0)
-            {
+            {                
                 for(unsigned int idx = i; idx<buf.length(); idx++) { buf[idx] = ')'; }
                 combinations.push_back(buf);
                 for(unsigned int idx = i; idx<buf.length(); idx++) { buf[idx] = '.'; }
@@ -63,3 +67,9 @@ public:
         
     }
 };
+
+int main()
+{
+    Solution driver;
+    driver.generateParenthesis(3);
+}
