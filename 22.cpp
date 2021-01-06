@@ -24,12 +24,14 @@ public:
         while(true)
         {
             std::cout<<"idx is: "<<i<<std::endl;        
-            // if(i>=6) i--;
+            if(i>=6) i--;
             // if(i>=6) exit(1);
 
             // - negative index indicates all paths travelled
             if(i<0) break;
-            
+            std::cout<<buf[i]<<std::endl;
+            std::cout<<"buf is: "<<buf<<std::endl;
+
             // end reached if no writes left
             if(writes==0)
             {                
