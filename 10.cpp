@@ -37,29 +37,29 @@ class Solution {
                 std::cout<<", iterator at: "<<itr-s.begin()<<std::endl;
 
                 // special case: if stop character is same as repeating regex
-                if(p[idx]==stop)
-                {
-                    // number of characters to not consume
-                    unsigned int reserve_size = 0; 
+                // if(p[idx]==stop)
+                // {
+                //     // number of characters to not consume
+                //     unsigned int reserve_size = 0; 
                                     
-                    // look ahead at how many regexes to reserve for
-                    for(unsigned int look_idx = idx+2; look_idx<p.length(); look_idx++)
-                    {
-                        if(p[look_idx]!=stop) break; // only look at characters equal need reserve for
-                        reserve_size++;
-                    }
+                //     // look ahead at how many regexes to reserve for
+                //     for(unsigned int look_idx = idx+2; look_idx<p.length(); look_idx++)
+                //     {
+                //         if(p[look_idx]!=stop) break; // only look at characters equal need reserve for
+                //         reserve_size++;
+                //     }
 
-                    // define consumption here
-                    while(itr!=s.end())
-                    {   
-                        // quit as soon as consuming a character leaves not enough characters to consume
-                        if(itr+reserve_size>=s.end()&&*(itr+reserve_size)!=stop) break;
-                        std::advance(itr, 1);                    
-                    }
+                //     // define consumption here
+                //     while(itr!=s.end())
+                //     {   
+                //         // quit as soon as consuming a character leaves not enough characters to consume
+                //         if(itr+reserve_size>=s.end()&&*(itr+reserve_size)!=stop) break;
+                //         std::advance(itr, 1);                    
+                //     }
 
-                    // rest of routine can be skipped
-                    continue;
-                }
+                //     // rest of routine can be skipped
+                //     continue;
+                // }
 
                 // 'consume' characters from input until found terminating character (i.e. 'stop')
                 while(itr!=s.end())
