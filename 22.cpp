@@ -24,28 +24,29 @@ public:
         while(true)
         {
             std::cout<<"idx is: "<<i<<std::endl;        
-            if(i>=6) i--;
-            // if(i>=6) exit(1);
+            // if(i>=6) i--;
+            if(i>=6) exit(1);
 
             // - negative index indicates all paths travelled
             if(i<0) break;
-            std::cout<<buf[i]<<std::endl;
+            // std::cout<<buf[i]<<std::endl;
             std::cout<<"buf is: "<<buf<<std::endl;
 
             // end reached if no writes left
-            if(writes==0)
+            if(writes<=0)
             {                
                 for(unsigned int idx = i; idx<buf.length(); idx++) { buf[idx] = ')'; }
                 combinations.push_back(buf);
                 for(unsigned int idx = i; idx<buf.length(); idx++) { buf[idx] = '.'; }
                 
                 buf[i] = '.';
-                writes--;
+                writes++;
                 i--;
             }
             
             else if(buf[i]=='.')
             {
+                std::cout<<"writes is: "<<writes<<std::endl;
                 buf[i] = '(';
                 writes--;
                 i++;
@@ -60,7 +61,7 @@ public:
             else if(buf[i]==')')
             {
                 buf[i]=='.';
-                writes--;
+                writes++;
                 i--;
             }            
         }
