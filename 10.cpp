@@ -50,7 +50,12 @@ class Solution {
                     }
 
                     // define consumption here
-                    
+                    while(itr!=s.end())
+                    {   
+                        // quit as soon as consuming a character leaves not enough characters to consume
+                        if(itr+reserve_size>=s.end()&&*(itr+reserve_size)!=stop) break;
+                        std::advance(itr, 1);                    
+                    }
 
                     // rest of routine can be skipped
                     continue;
@@ -61,7 +66,6 @@ class Solution {
                 {   
                     if(*itr==stop) break;
                     if(p[idx]!='.'&&(p[idx]!=*itr)) break;
-                    std::cout<<"consuming: "<<*itr<<std::endl;
                     std::advance(itr, 1);
                 }
             }
