@@ -36,23 +36,29 @@ class Solution {
                 std::cout<<"regex is: "<<p[idx]<<", stop is: "<<stop;
                 std::cout<<", iterator at: "<<itr-s.begin()<<std::endl;
 
+                // special case: if stop character is same as repeating regex
+                if(p[idx]==stop)
+                {
+                    // number of characters to not consume
+                    unsigned int reserve_size = 0; 
+                                    
+                    // look ahead at how many regexes to reserve for
+                    for(unsigned int look_idx = idx+2; look_idx<p.length(); look_idx++)
+                    {
+                        if(p[look_idx]!=stop) break; // only look at characters equal need reserve for
+                        reserve_size++;
+                    }
+
+                    // define consumption here
+
+                    // rest of routine can be skipped
+                    continue;
+                }
+
                 // 'consume' characters from input until found terminating character (i.e. 'stop')
                 while(itr!=s.end())
                 {   
-                    if(*itr==stop) 
-                    {
-                        if(itr+1<s.end())
-                        {
-                            std::cout<<"char is: "<<*(itr+1)<<std::endl;
-                        }
-
-                        // let repeater consume as many chars as possible
-                        if(itr+1<s.end()&&*(itr+1)!=stop)
-                        {
-                            // let next sub-regex handle this otherwise
-                            break; 
-                        }                        
-                    }
+                    if(*itr==stop) break; // let next sub-regex handle this otherwise                                
 
                     // else if(*itr!='.'&&*itr!=p[idx]) break;
                     // if(*itr=='.') std::cout<<"here!"<<std::endl; // dot '.' matches all characters
