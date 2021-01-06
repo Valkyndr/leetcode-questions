@@ -16,6 +16,9 @@ class Solution {
             // - '*' is not a 'hard-value'
             if(p[idx]=='*') continue;
 
+            // return false if itr reaches end here! (since regexes yet remain, but no characters left)
+            if(itr>=s.end()) return false;
+
             // start repeater routine if next char is '*'
             if(idx+1<p.length()&&(p[idx+1]=='*'))
             {
@@ -37,29 +40,29 @@ class Solution {
                 std::cout<<", iterator at: "<<itr-s.begin()<<std::endl;
 
                 // special case: if stop character is same as repeating regex
-                // if(p[idx]==stop)
-                // {
-                //     // number of characters to not consume
-                //     unsigned int reserve_size = 0; 
+                if(p[idx]==stop)
+                {
+                    // number of characters to not consume
+                    unsigned int reserve_size = 0; 
                                     
-                //     // look ahead at how many regexes to reserve for
-                //     for(unsigned int look_idx = idx+2; look_idx<p.length(); look_idx++)
-                //     {
-                //         if(p[look_idx]!=stop) break; // only look at characters equal need reserve for
-                //         reserve_size++;
-                //     }
+                    // look ahead at how many regexes to reserve for
+                    for(unsigned int look_idx = idx+2; look_idx<p.length(); look_idx++)
+                    {
+                        if(p[look_idx]!=stop) break; // only look at characters equal need reserve for
+                        reserve_size++;
+                    }
 
-                //     // define consumption here
-                //     while(itr!=s.end())
-                //     {   
-                //         // quit as soon as consuming a character leaves not enough characters to consume
-                //         if(itr+reserve_size>=s.end()&&*(itr+reserve_size)!=stop) break;
-                //         std::advance(itr, 1);                    
-                //     }
+                    // define consumption here
+                    while(itr!=s.end())
+                    {   
+                        // quit as soon as consuming a character leaves not enough characters to consume
+                        if(itr+reserve_size>=s.end()&&*(itr+reserve_size)!=stop) break;
+                        std::advance(itr, 1);                    
+                    }
 
-                //     // rest of routine can be skipped
-                //     continue;
-                // }
+                    // rest of routine can be skipped
+                    continue;
+                }
 
                 // 'consume' characters from input until found terminating character (i.e. 'stop')
                 while(itr!=s.end())
@@ -78,13 +81,10 @@ class Solution {
                     std::advance(itr, 1);
                 else
                 {                    
-                    std::cout<<"iterator has landed at: "<<itr-s.begin()<<std::endl;
                     return false;
                 }
             }
         }
-
-        std::cout<<"iterator has landed at: "<<itr-s.begin()<<std::endl;
 
         // if itr is not at end, there remain unconsumed characters
         return (itr==s.end());
@@ -95,5 +95,5 @@ class Solution {
 int main()
 {
     Solution driver;
-    std::cout<<driver.isMatch("aaa", "a*a")<<std::endl;
+    std::cout<<driver.isMatch("aaa", "ab*a*c*a")<<std::endl;
 }
