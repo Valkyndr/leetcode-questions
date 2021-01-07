@@ -23,6 +23,8 @@ public:
         
         while(true)
         {
+            std::cout<<"idx: ["<<i<<"], writes: ["<<writes<<"]"<<", buffer is: "<<buf<<std::endl;
+
             // debug line:
             if(i>=6) exit(1);
 
@@ -43,7 +45,6 @@ public:
             
             else if(buf[i]=='.')
             {
-                std::cout<<"writes is: "<<writes<<std::endl;
                 buf[i] = '(';
                 writes--;
                 i++;
