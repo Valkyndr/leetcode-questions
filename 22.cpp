@@ -91,6 +91,9 @@ public:
                 // '(' is changed indiscriminately
                 close_brs += 1;
 
+                // 'reset' char at this idx to 'empty'
+                buf[idx] = '.';
+
                 // no paths left
                 direction = -1;
             }
