@@ -45,13 +45,39 @@ public:
                 }
                 
                 combinations.push_back(copy);
+                idx--;
             }
 
+            // initialize value here
             else if(buf[idx]=='.')
-            {
+            {                  
+                buf[idx] = '(';
                 open_brs -= 1;
                 close_brs += 1;
                 idx++;
+            }
+
+            // if already wrote '(', write ')' and advance
+            else if(buf[idx]=='(')
+            {
+                // '(' is changed indiscriminately
+                open_brs += 1;
+                close_brs -= 1;
+
+                // if can, write closing bracket
+                if(close_brs>0)
+                {
+                    buf[idx] = ')';
+                    close_brs--;
+                    idx++;
+                }
+
+                else // step back (all forward paths exhausted)
+                {
+                    buf[idx] = '.';
+                    idx--;
+                }
+                
             }
        
         }
