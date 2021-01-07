@@ -10,58 +10,50 @@ public:
         
         // - write each combination to buffer
         std::string buf(n*2, '.');
-        int i = 0;
         
         // - store each combination
         std::vector<std::string> combinations;
-        
-        // - store no. of 'moves' can make
-        int writes = n;
-        
+
         // 'initialise' the sequence
-        buf[i] = '.'; 
+        // buf[idx] = '.'; 
         
+        // open_br in bufcan be most 'n'
+        int open_brs = n;
+
+        // close_br must not exceed open_br in buf
+        int close_brs = 0;
+
+        // traver through buf
+        int idx = 0;
+
         while(true)
         {
-            std::cout<<"idx: ["<<i<<"], writes: ["<<writes<<"]"<<", buffer is: "<<buf<<std::endl;
+            // std::cout<<"idx: ["<<i<<"], writes: ["<<writes<<"]"<<", buffer is: "<<buf<<std::endl;
 
             // debug line:
-            if(i>=6) exit(1);
+            // if(i>=6) exit(1);
+            
+            // start padding routine
+            if(open_brs<=0)
+            {
+                auto copy = buf;
 
-            // negative index indicates all paths travelled
-            if(i<0) break;
-
-            // end reached if no writes left
-            if(writes<=0)
-            {                
-                for(unsigned int idx = i; idx<buf.length(); idx++) { buf[idx] = ')'; }
-                combinations.push_back(buf);
-                for(unsigned int idx = i; idx<buf.length(); idx++) { buf[idx] = '.'; }
+                // can safely and lazily add ')' chars here
+                for(unsigned int copy_idx = idx; copy_idx<copy.length(); copy_idx++)
+                {
+                    copy[copy_idx] = ')';
+                }
                 
-                buf[i] = '.';
-                writes++;
-                i--;
+                combinations.push_back(copy);
             }
-            
-            else if(buf[i]=='.')
+
+            else if(buf[idx]=='.')
             {
-                buf[i] = '(';
-                writes--;
-                i++;
+                open_brs -= 1;
+                close_brs += 1;
+                idx++;
             }
-        
-            else if(buf[i]=='(')
-            {
-                buf[i]==')';
-                i++;
-            }
-            
-            else if(buf[i]==')')
-            {
-                buf[i]=='.';
-                writes++;
-                i--;
-            }            
+       
         }
         
         return combinations;
