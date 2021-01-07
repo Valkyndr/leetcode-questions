@@ -1,6 +1,7 @@
-#include<iostream>
 #include<string>
 #include<vector>
+#include<iostream>
+#include<algorithm>
 using namespace std;
 
 class Solution {
@@ -33,6 +34,9 @@ public:
             // debug line:
             // if(i>=6) exit(1);
             
+            // work is done when 'idx' is negative
+            if(idx<0) break;
+
             // start padding routine
             if(open_brs<=0)
             {
@@ -76,10 +80,18 @@ public:
                 {
                     buf[idx] = '.';
                     idx--;
-                }
-                
+                }                
             }
        
+            else if(buf[idx]==')')
+            {
+                // '(' is changed indiscriminately
+                close_brs += 1;
+
+                // no paths left
+                idx--;
+            }
+
         }
         
         return combinations;
@@ -90,5 +102,10 @@ public:
 int main()
 {
     Solution driver;
-    driver.generateParenthesis(3);
+    auto combos = driver.generateParenthesis(3);
+    std::for_each(combos.begin(), combos.end(), [](const std::string& str)
+    {
+        std::cout<<str<<" ";
+    });
+    std::cout<<'\n';
 }
