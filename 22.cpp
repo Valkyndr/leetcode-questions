@@ -29,7 +29,7 @@ public:
 
         while(true)
         {
-            // std::cout<<"idx: ["<<i<<"], writes: ["<<writes<<"]"<<", buffer is: "<<buf<<std::endl;
+            std::cout<<"idx: ["<<idx<<"], open_brackets left: ["<<open_brs<<"], closing brackets left: ["<<close_brs<<"], buffer is: "<<buf<<std::endl;
 
             // debug line:
             // if(i>=6) exit(1);
@@ -48,6 +48,9 @@ public:
                     copy[copy_idx] = ')';
                 }
                 
+                // debug:
+                std::cout<<"sending string: "<<copy<<'\n';
+
                 combinations.push_back(copy);
                 idx--;
             }
@@ -65,8 +68,8 @@ public:
             else if(buf[idx]=='(')
             {
                 // '(' is changed indiscriminately
-                open_brs += 1;
-                close_brs -= 1;
+                open_brs++;
+                close_brs--;
 
                 // if can, write closing bracket
                 if(close_brs>0)
