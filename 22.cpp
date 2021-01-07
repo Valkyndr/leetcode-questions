@@ -24,8 +24,8 @@ public:
         // close_br must not exceed open_br in buf
         int close_brs = 0;
 
-        // traver through buf
-        int idx = 0;
+        // traverse through buf
+        int idx = 0, direction = 1;
 
         while(true)
         {
@@ -37,8 +37,8 @@ public:
             // work is done when 'idx' is negative
             if(idx<0) break;
 
-            // start padding routine
-            if(open_brs<=0)
+            // start padding routine IFF was traversing forward
+            if((direction>0)&&open_brs<=0)
             {
                 auto copy = buf;
 
@@ -52,7 +52,7 @@ public:
                 std::cout<<"sending string: "<<copy<<'\n';
 
                 combinations.push_back(copy);
-                idx--;
+                direction = -1;
             }
 
             // initialize value here
@@ -61,7 +61,7 @@ public:
                 buf[idx] = '(';
                 open_brs -= 1;
                 close_brs += 1;
-                idx++;
+                direction = 1;
             }
 
             // if already wrote '(', write ')' and advance
@@ -76,13 +76,13 @@ public:
                 {
                     buf[idx] = ')';
                     close_brs--;
-                    idx++;
+                    direction = 1;
                 }
 
                 else // step back (all forward paths exhausted)
                 {
                     buf[idx] = '.';
-                    idx--;
+                    direction = -1;
                 }                
             }
        
@@ -92,8 +92,11 @@ public:
                 close_brs += 1;
 
                 // no paths left
-                idx--;
+                direction = -1;
             }
+
+            // direction should have been set in any of previous if cases
+            idx += direction;
 
         }
         
