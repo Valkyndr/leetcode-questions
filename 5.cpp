@@ -25,7 +25,7 @@ public:
         this->word = s;
         
         // store indices to longest palindrome (initialize)
-        size_t l_idx = 0, r_idx = 0;            
+        size_t l_idx = 0, r_idx = 1;            
         
         // debug
         std::cout<<"input: "<<s<<std::endl;
@@ -43,8 +43,9 @@ public:
                     std::cout<<"stopping at: idx["<<idx-dist<<"]: "<<charAt(idx-dist)<<" !=";
                     std::cout<<"stopping at: idx["<<idx+dist+1<<"]: "<<charAt(idx+dist+1)<<std::endl;
 
-                    if((2*dist)+2>r_idx-l_idx)
-                    {                       
+                    if((2*dist)>r_idx-l_idx)
+                    {                                               
+                        std::cout<<"found length of: "<<2*dist<<" > "<<r_idx-l_idx<<std::endl;
                         l_idx = idx-dist, r_idx = idx+dist+1;
                     }
                     break;
