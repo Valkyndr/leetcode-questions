@@ -15,7 +15,7 @@ public:
     char charAt(size_t idx)
     {
         if(idx<0) return '?';
-        else if(idx>=this->word.length()) return '!';        
+        else if(idx>=this->word.length()) return '#';        
         else return this->word[idx];
     }
     
@@ -25,23 +25,27 @@ public:
         this->word = s;
         
         // store indices to longest palindrome (initialize)
-        size_t l_idx = 0, r_idx = 1;            
+        int l_idx = 0, r_idx = 1;            
         
         // debug
         std::cout<<"input: "<<s<<std::endl;
 
-        for(size_t idx = 0; idx<s.length(); idx++)
+        for(int idx = 0; idx<s.length(); idx++)
         {            
-            // start separate routines based on 'type' of palindrome
-            
+            // start separate routines based on 'type' of palindrome            
+
             // palindrome with two 'central characters' i.e. 'abba'
-            for(size_t dist = 0; dist<s.length() ; dist++)
+            for(int dist = 0; dist<s.length() +1; dist++)
             {
+
+                std::cout<<"comparing: idx["<<idx-dist<<"]: "<<charAt(idx-dist)<<" == ";
+                std::cout<<" idx["<<idx+dist+1<<"]: "<<charAt(idx+dist+1)<<std::endl;
+
                 if(charAt(idx-dist)!=charAt(idx+dist+1))
                 {
                     // debug:
                     std::cout<<"stopping at: idx["<<idx-dist<<"]: "<<charAt(idx-dist)<<" !=";
-                    std::cout<<"stopping at: idx["<<idx+dist+1<<"]: "<<charAt(idx+dist+1)<<std::endl;
+                    std::cout<<" idx["<<idx+dist+1<<"]: "<<charAt(idx+dist+1)<<std::endl;
 
                     if((2*dist)>r_idx-l_idx)
                     {                                               
