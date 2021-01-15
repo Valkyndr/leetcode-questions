@@ -36,7 +36,7 @@ public:
             // start separate routines based on 'type' of palindrome
             
             // palindrome with two 'central characters' i.e. 'abba'
-            for(size_t dist = 0;; dist++)
+            for(size_t dist = 0; dist<s.length() ; dist++)
             {
                 if(charAt(idx-dist)!=charAt(idx+1+dist))
                 {
@@ -49,7 +49,7 @@ public:
             }
         
             // palindrome with only 1 'central character' i.e. 'aba'
-            for(size_t dist = 0;; dist++)
+            for(size_t dist = 0; dist<s.length() ; dist++)
             {
 
                 if(charAt(idx-dist)!=charAt(idx+dist))
