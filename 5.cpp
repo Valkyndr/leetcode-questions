@@ -14,12 +14,8 @@ public:
         
     char charAt(size_t idx)
     {
-        if(idx<0||idx>=this->word.size())
-        {
-            // if out of range, return 'false' char
-            return INVALID_CHAR;
-        }
-        
+        if(idx<0) return '?';
+        else if(idx>=this->word.length()) return '!';        
         else return this->word[idx];
     }
     
@@ -31,6 +27,9 @@ public:
         // store indices to longest palindrome (initialize)
         size_t l_idx = 0, r_idx = 0;            
         
+        // debug
+        std::cout<<"input: "<<s<<std::endl;
+
         for(size_t idx = 0; idx<s.length(); idx++)
         {            
             // start separate routines based on 'type' of palindrome
@@ -38,30 +37,36 @@ public:
             // palindrome with two 'central characters' i.e. 'abba'
             for(size_t dist = 0; dist<s.length() ; dist++)
             {
-                if(charAt(idx-dist)!=charAt(idx+1+dist))
+                if(charAt(idx-dist)!=charAt(idx+dist+1))
                 {
+                    // debug:
+                    std::cout<<"stopping at: idx["<<idx-dist<<"]: "<<charAt(idx-dist)<<" !=";
+                    std::cout<<"stopping at: idx["<<idx+dist+1<<"]: "<<charAt(idx+dist+1)<<std::endl;
+
                     if((2*dist)+2>r_idx-l_idx)
-                    {
+                    {                       
                         l_idx = idx-dist, r_idx = idx+dist+1;
                     }
                     break;
                 }
             }
         
-            // palindrome with only 1 'central character' i.e. 'aba'
-            for(size_t dist = 0; dist<s.length() ; dist++)
-            {
+            // // palindrome with only 1 'central character' i.e. 'aba'
+            // for(size_t dist = 0; dist<s.length() ; dist++)
+            // {
 
-                if(charAt(idx-dist)!=charAt(idx+dist))
-                {
-                    if((2*dist)+1>r_idx-l_idx)
-                    {                        
-                        l_idx = idx-dist, r_idx = idx+dist;
-                    }
-                    break;
-                }
+            //     if(charAt(idx-dist)!=charAt(idx+dist))
+            //     {
+            //         std::cout<<"found at idx: "<<idx<<std::endl;                        
 
-            }        
+            //         if((2*dist)+1>r_idx-l_idx)
+            //         {                        
+            //             l_idx = idx-dist, r_idx = idx+dist;                    
+            //         }
+            //         break;
+            //     }
+
+            // }        
 
         }
         
