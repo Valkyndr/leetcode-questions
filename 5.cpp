@@ -12,7 +12,7 @@ public:
     // store word to avoid assing args to helpers
     std::string word;
         
-    char charAt(size_t idx)
+    char charAt(int idx)
     {
         if(idx<0) return '?';
         else if(idx>=this->word.length()) return '#';        
@@ -46,6 +46,8 @@ public:
                     // debug:
                     std::cout<<"stopping at: idx["<<idx-dist<<"]: "<<charAt(idx-dist)<<" !=";
                     std::cout<<" idx["<<idx+dist+1<<"]: "<<charAt(idx+dist+1)<<std::endl;
+
+                    std::cout<<"dist is: "<<dist<<std::endl; 
 
                     if((2*dist)>r_idx-l_idx)
                     {                                               
