@@ -16,10 +16,17 @@ public:
             length++;
             balance += (c=='(') ? 1 : 0;
         }
+        
         int getBalance() const
         {
             // at time of read: '0' if well-formed, negative if not
             return this->balance;
+        }
+
+        int getLength() const
+        {
+            // return supposed 'length' of the string read by this walker
+            return this->length;
         }
     };
     
@@ -37,21 +44,30 @@ public:
                 
                 // compare against largest string
                 int balance = walker->getBalance();
-                if(balance==0) max = (balance>max) ? balance : max;
+                if(balance==0)
+                {
+                    max = (walker->getLength()>max) ? walker->getLength() : max;
+                }
             });
             
+            // debug
+            std::for_each(walkers.begin(), walkers.end(), [=](const Walker* walker)
+            {
+                std::cout<<walker->getBalance()<<" ";
+            });
+            std::cout<<'\n';
+
             // remove 'dead walkers' (strings whose parentheses are no longer well formed)
             std::remove_if(walkers.begin(), walkers.end(), [=](Walker* walker)
             {
                 return (walker->getBalance() < 0);
             });
         }
-        
-        return max;
     }
 };
 
 int main()
 {
-
+    Solution solver;
+    std::cout<<"ans is: "<<solver.longestValidParentheses("(()")<<'\n';
 }
