@@ -14,7 +14,7 @@ public:
         void read(char c)
         {
             length++;
-            balance += (c=='(') ? 1 : 0;
+            balance += (c=='(') ? 1 : -1;
         }
         
         int getBalance() const
@@ -35,8 +35,14 @@ public:
         std::vector<Walker*> walkers;
         size_t max = 0;
         
+        // debug:
+        size_t iteration = 0;
+        
         for(const char& c: s)
         {
+            iteration++;
+            std::cout<<"ITERATION: "<<iteration<<'\n';
+
             if(c=='(') walkers.push_back(new Walker());
             std::for_each(walkers.begin(), walkers.end(), [&](Walker* walker)
             {
@@ -56,11 +62,11 @@ public:
             });
 
             // debug
-            // std::for_each(walkers.begin(), walkers.end(), [=](const Walker* walker)
-            // {
-            //     std::cout<<walker->getBalance()<<" ";
-            // });
-            // std::cout<<'\n';
+            std::for_each(walkers.begin(), walkers.end(), [=](const Walker* walker)
+            {
+                std::cout<<walker->getBalance()<<" ";
+            });
+            std::cout<<'\n';
 
             // remove 'dead walkers' (strings whose parentheses are no longer well formed)
             std::remove_if(walkers.begin(), walkers.end(), [=](Walker* walker)
@@ -76,5 +82,6 @@ public:
 int main()
 {
     Solution solver;
-    std::cout<<"ans is: "<<solver.longestValidParentheses("(()")<<'\n';
+    int ans = solver.longestValidParentheses("(()");
+    std::cout<<"ans is: "<<ans<<'\n';
 }
