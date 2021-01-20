@@ -46,16 +46,21 @@ public:
                 int balance = walker->getBalance();
                 if(balance==0)
                 {
-                    max = (walker->getLength()>max) ? walker->getLength() : max;
+                    // max = (walker->getLength()>max) ? walker->getLength() : max;
+                    if(walker->getLength()>max)
+                    {
+                        std::cout<<"mutating"<<std::endl;
+                        max = walker->getLength();
+                    }
                 }
             });
-            
+
             // debug
-            std::for_each(walkers.begin(), walkers.end(), [=](const Walker* walker)
-            {
-                std::cout<<walker->getBalance()<<" ";
-            });
-            std::cout<<'\n';
+            // std::for_each(walkers.begin(), walkers.end(), [=](const Walker* walker)
+            // {
+            //     std::cout<<walker->getBalance()<<" ";
+            // });
+            // std::cout<<'\n';
 
             // remove 'dead walkers' (strings whose parentheses are no longer well formed)
             std::remove_if(walkers.begin(), walkers.end(), [=](Walker* walker)
@@ -63,6 +68,8 @@ public:
                 return (walker->getBalance() < 0);
             });
         }
+        
+        return max;
     }
 };
 
