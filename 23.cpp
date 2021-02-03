@@ -54,9 +54,13 @@ public:
         ListNode* mergedList;
 
         // declare some set of pointers
-        vector<NodePtr> ptrs(lists.size());
+        vector<NodePtr*> ptrs(lists.size(), nullptr);
 
-        
+        // set pointers to each start of 'lists'
+        for(int idx=0; idx<lists.size(); idx)
+        {
+            ptrs[idx] = new NodePtr(lists[idx]);
+        }
     }
 };
 
