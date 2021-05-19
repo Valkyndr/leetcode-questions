@@ -1,20 +1,33 @@
 #include<iostream>
+#include<vector>
+#include<tuple>
+#include<stack>
 
 class Solution {
+
+    // alias to an explicit std::range instantiation
+    typedef std::tuple<int, int> range;
+
 public:
     
-    int search(vector<int>& nums, int target) {
-        
-        const size_t start_idx = 0, end_idx = nums.size()-1;
-        const int start_value = nums[start_idx], end_value = nums[end_value];
-        
-        if(start_value==target) return start_idx;
-        else if(end_value==target) return end_idx;
-        else
+    int search(std::vector<int>& nums, int target)
+    {
+        std::stack<range> ranges;
+        range* buffer;
+
+        // initiate sequence by placing first range (indices to first and last elements on stack)
+        ranges.push(std::make_tuple<int,int>(0, ranges.size()-1));
+
+        // as long as have ranges not explored...
+        while(!ranges.empty())
         {
-            
+            buffer = ranges.pop(); 
+
+            // get middle index
+            int split_idx = 
         }
-        
+
+       
     }
 };
 
