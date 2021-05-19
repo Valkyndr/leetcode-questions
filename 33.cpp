@@ -30,8 +30,14 @@ public:
                 1.  if buf[0] == buf[1] then terminate this stack (skip to next loop)
             */
 
+            // calculate length between indices
+            const int n = std::get<int>(*(buf));
+
+            // remember: RIGHT sub-divided range includes the index
+
             // get middle index
-            int split_idx = 
+            int split_idx = (n-n%2)/2;
+
         }
 
        
