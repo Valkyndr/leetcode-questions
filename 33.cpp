@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cassert>
 #include<vector>
 #include<tuple>
 #include<stack>
@@ -16,7 +17,11 @@ class Solution {
 
         static constexpr idx_t get_mid(const idx_t _start, const idx_t _end)
         {
-            static_assert(_start<=_end);
+            // params are non-negative and ordered
+            assert(_start<=_end);
+            assert(_start>=0);
+
+            // mid-index calculated is equal regardless if odd/even 'length'
             const idx_t length = _end - _start;
             return (length-length%2)/2;
         }
