@@ -14,25 +14,10 @@ class Solution {
         // alias to some type suited for indices
         typedef size_t idx_t;        
 
-        // 
-        const idx_t& start_idx;
-        const idx_t& mid_idx;
-        const idx_t& end_idx; 
-
         public:
-        
-        template<typename CONTAINER_TYPE> Subrange(CONTAINER_TYPE&& container)
-        {
-            
-        }
 
-        // return a Subrange object from some 
-        template<typename CONTAINER_TYPE> Subrange make_subrange_of(CONTAINER_TYPE&& container)
-        {
-            
+        Subrange
 
-            return std::move(...);
-        }
     };
 
 public:
