@@ -28,7 +28,7 @@ class Solution {
         }
 
         // expose const indices
-        const idx_t start, mid, end;
+        const idx_t start, end;
 
         public:
 
