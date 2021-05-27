@@ -24,7 +24,7 @@ class Solution {
         // private factory function to generate a copy
         Subrange& make_copy(idx_t _start, idx_t _end) const
         {
-            Subrange cpy = Subrange(collection, _start, _end);
+            constSubrange cpy = Subrange(collection, _start, _end);
             return std::move(cpy);
         }
 
@@ -56,6 +56,9 @@ class Solution {
         {
             return get_mid_of_range(this->start, this->end);
         }
+
+        // factory functions to generate subdivisions
+        auto make_left = std::bind(make_copy, collection, start, end);
 
     };
 
