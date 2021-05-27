@@ -22,10 +22,10 @@ class Solution {
         // typedef idx_t(idx_t, idx_t) calc_func;
 
         // private factory function to generate a copy
-        Subrange& make_copy(idx_t _start, idx_t _end) const
+        Subrange make_copy(idx_t _start, idx_t _end) const
         {
-            constSubrange cpy = Subrange(collection, _start, _end);
-            return std::move(cpy);
+            // TODO(): move this object as return value?
+            return Subrange(collection, _start, _end);
         }
 
         // calculate index to midpoint (this value is same whether even/odd length)
@@ -58,7 +58,15 @@ class Solution {
         }
 
         // factory functions to generate subdivisions
-        auto make_left = std::bind(make_copy, collection, start, end);
+        Subrange make_left() const
+        {
+            return make_copy(start, mid());
+        }
+
+        Subrange make_right() const
+        {
+            return make_copy(mid(), end);
+        }
 
     };
 
