@@ -12,12 +12,21 @@ class Solution {
     {
         // typedefs / aliases 
         typedef size_t idx_t;
-        
+        typedef std::vector<int> cont_t;
+
+        // expose const indices
+        const idx_t start, end;
+        const cont_t& collection;
+
         // review type signatures here 
         // typedef idx_t(idx_t, idx_t) calc_func;
 
-        // hold some reference to some container here
-        const int& reference;
+        // private factory function to generate a copy
+        Subrange& make_copy(idx_t _start, idx_t _end) const
+        {
+            Subrange cpy = Subrange(collection, _start, _end);
+            return std::move(cpy);
+        }
 
         // calculate index to midpoint (this value is same whether even/odd length)
         static constexpr idx_t get_mid_of_range(const idx_t _start, const idx_t _end)
@@ -31,12 +40,22 @@ class Solution {
             return (length-length%2)/2;
         }
 
-        // expose const indices
-        const idx_t start, end;
-
         public:
 
-        std::function<idx_t(idx_t, idx_t)> get_mid = std::bind(get_mid_of_range, this->start, this->end);
+        // constructors (no default)
+        Subrange() = delete;
+        Subrange(const cont_t& container, const idx_t& _start, const idx_t& _end): start(_start), end(_end), collection(container)
+        {
+            
+        }
+
+        // getters
+        idx_t left() const { return this->start; }
+        idx_t right() const { return this->end; }
+        idx_t mid() const 
+        {
+            return get_mid_of_range(this->start, this->end);
+        }
 
     };
 
