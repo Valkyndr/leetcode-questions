@@ -49,6 +49,6 @@ int main()
 {
 
     // using Subrange = Solution::Subrange<std::vector>;
-    typedef Solution::Subrange<std::vector> Subrange;
+    typedef Solution::Subrange<std::vector<int>> Subrange;
 
 }
