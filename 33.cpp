@@ -8,7 +8,7 @@
 class Solution {
 
     // light-weight class to access a subrange of some indexable object
-    template<typename T> class Subrange
+    template<class T> class Subrange
     {
         // typedefs / aliases
         typedef size_t idx_t;
@@ -33,10 +33,10 @@ class Solution {
             mid(get_mid_of(_left, _right)), 
             length(_right - _left + 1),
             ref(&_target)
-            {
-                assert(_left>=0);
-                assert(_right>=_left);
-            }
+        {
+            assert(_left>=0);
+            assert(_right>=_left);
+        }
 
     };
 
@@ -47,5 +47,8 @@ class Solution {
 
 int main()
 {
+
+    // using Subrange = Solution::Subrange<std::vector>;
+    typedef Solution::Subrange<std::vector> Subrange;
 
 }
