@@ -15,7 +15,8 @@ class Solution {
 
         idx_t get_mid_of(const idx_t lbound, const idx_t rbound) const
         {
-            return 
+            // this formula ensures the same middle index, regardless whether length even/odd
+            return left + (length - (length%2) ) / 2;
         }
 
         const idx_t left, mid, right;
