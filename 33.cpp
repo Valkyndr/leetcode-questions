@@ -38,8 +38,17 @@ class Solution {
             assert(_right>=_left);
         }
 
-    };
+        // debug methods
+        void print() const
+        {
+            for(idx_t idx = 0; idx < length; idx++)
+            {
+                std::cout<<(*ref)[left+idx]<<" ";
+            }
+            std::cout<<std::endl;
+        }
 
+    };
 
     public:
 
@@ -50,5 +59,9 @@ int main()
 
     // using Subrange = Solution::Subrange<std::vector>;
     typedef Solution::Subrange<std::vector<int>> Subrange;
+
+    std::vector<int> nums = { 1, 2, 3, 4 } ;
+    Subrange myrange(0, 3, nums);
+    myrange.print(); 
 
 }
