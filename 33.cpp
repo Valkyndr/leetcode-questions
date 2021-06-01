@@ -22,7 +22,8 @@ class Solution {
             return left + (length - (length%2) ) / 2;
         }
 
-        std::function<idx_t(idx_t, idx_t)> get_left_centre = std::bind(&Solution::Subrange<T>::get_mid_of, this, this->left, this->mid);
+        std::function<idx_t(idx_t, idx_t)> get_mid_of_left = std::bind(&Solution::Subrange<T>::get_mid_of, this, this->left, this->mid);
+        std::function<idx_t(idx_t, idx_t)> get_mid_of_right = std::bind(&Solution::Subrange<T>::get_mid_of, this, this->mid, this->right);
 
         const idx_t left, mid, right;
         const size_t length; 
@@ -51,10 +52,10 @@ class Solution {
         }
 
         // factory methods
-        // Subrange make_left() const
-        // {
-        //     return Subrange();
-        // }
+        Subrange make_left() const
+        {
+            return Subrange(this -> left, this->get_mid_of_left(), *(this->ref));
+        }
     };
 
     public:
@@ -67,9 +68,9 @@ int main()
     // using Subrange = Solution::Subrange<std::vector>;
     typedef Solution::Subrange<std::vector<int>> Subrange;
 
-    std::vector<int> nums = { 1, 2, 3, 4 } ;
-    Subrange myrange(0, 0, nums);
-    // Subrange leftrange = myrange.make_lef
+    std::vector<int> nums = { 1, 2, 3, 4, 5, 6, 7, 8} ;
+    Subrange myrange(2, 5, nums);
+    Subrange leftrange = myrange.make_left();
     myrange.print(); 
 
 }
